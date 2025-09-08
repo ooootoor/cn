@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="中文转换器">
+  <meta name="description" content="简繁体字转换工具">
+  <meta name="author" content="网易，NetEase Inc.">
+  <meta name="copyright" content="网易，NetEase Inc.">
+  <title>皮皮虾</title>
+  <link rel="icon" type="image/jpg" href="https://haoss.eu.org/ppx.jpg" />
+  <style>
+    /* 简化选择器，避免重复的类名 */
+    textarea.form-control {
+      width: 90%;
+      margin: 0 auto;
+      padding: 6px 12px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      font-size: 14px;
+      box-sizing: content-box;
+      display: block;
+    }
+
+    textarea.form-control:hover {
+      border-color: #66be8c;
+    }
+
+    .toolbar {
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.42857143;
+      text-align: center;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 0.5em 0;
+    }
+
+    .btn-success {
+      color: #fff;
+      background-color: #5cb85c;
+      border-color: #4cae4c;
+    }
+
+    .btn-danger {
+      color: #fff;
+      background-color: #d9534f;
+      border-color: #d43f3a;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <textarea class="form-control" id="txt" name="txt" rows="10" placeholder="请输入文本进行简繁体转换"></textarea>
+    <div class="toolbar">
+      <button type="button" class="btn btn-success convert" data-type="1">简转繁</button>
+      <button type="button" class="btn btn-success convert" data-type="2">繁转简</button>
+      <button type="button" class="btn btn-danger clear">清空</button>
+    </div>
+  </div>
+  
+  <script src="./convert.js"></script>
+  <script>
+    document.getElementById('app').addEventListener('click', function(e) {
+      const target = e.target;
+      const classList = target.classList;
+      const textarea = document.getElementById('txt');
+      
+      if (classList.contains('convert')) {
+        const type = target.dataset.type;
+        const words = textarea.value;
+        textarea.value = convert(words, type);
+      } else if (classList.contains('clear')) {
+        textarea.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
